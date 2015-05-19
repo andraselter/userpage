@@ -6,11 +6,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/Acme/DemoBundle/Entity/User.php" description="private $email;" line="43" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="24bdbfd7-8e45-4645-b50f-2ddbc4b1064f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/DemoBundle/Service/FBService.php" afterPath="$PROJECT_DIR$/src/Acme/DemoBundle/Service/FBService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Acme/DemoBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Acme/DemoBundle/Entity/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="24bdbfd7-8e45-4645-b50f-2ddbc4b1064f" name="Default" comment="" />
     <ignored path="userpage.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
