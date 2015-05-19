@@ -38,8 +38,6 @@ class FBService implements OAuthAwareUserProviderInterface
 //        $resourceOwnerName = $response->getUsername();
         $email = $response->getEmail();
         $full_name = $response->getRealName();
-        $password = $response->getTokenSecret();
-        $response->
         $datetime = new \DateTime('now');
         $ip = $_SERVER['REMOTE_ADDR'];
 
@@ -51,7 +49,6 @@ class FBService implements OAuthAwareUserProviderInterface
             $currentUser->setLastLogin($datetime);
             $currentUser->setClientIP($ip);
             $currentUser->setFullName($full_name);
-            $currentUser->setPassword($password);
             $currentUser->setEmail($email);
             $currentUser->setIsActive(true);
             $currentUser->setPhone('null');

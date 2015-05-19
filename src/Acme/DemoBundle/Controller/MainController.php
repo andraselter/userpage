@@ -148,7 +148,34 @@ class MainController extends Controller
      */
     public function profileAction()
     {
-        return new Response("profile");
+        // storing login date and IP
+        $current_datetime = new \DateTime('now');
+        $current_IP = $_SERVER['REMOTE_ADDR'];
+
+        $token_obj = $this->get('security.context')->getToken();
+        $token = $token_obj->getUser()->getToken();
+
+        $user = $this->getDoctrine()
+            ->getRepository('AcmeDemoBundle:User')
+            ->findOneBy(array('token' => $token));
+        $user->setLastLogin($current_datetime);
+        $user->setClientIP($current_IP);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+        //
+
+        $user = $token_obj->getUser();
+        $full_name = $user->getFullName();
+        $email = $user->getEmail();
+        $phone = $user->getPhone();
+
+        return $this->render('security/adminpage.html.twig', array(
+            'full_name' => $full_name,
+            'email' => $email,
+            'phone' => $phone
+        ));
     }
 
 }
