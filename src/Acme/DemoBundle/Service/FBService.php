@@ -46,22 +46,19 @@ class FBService implements OAuthAwareUserProviderInterface
 
         $currentUser->setLastLogin($datetime);
         $currentUser->setClientIP($ip);
+        $currentUser->setFullName($full_name);
+        $currentUser->setPassword($password);
+        $currentUser->setEmail($email);
+        $currentUser->setIsActive(true);
+        $currentUser->setPhone('null');
+        $currentUser->setToken(md5($email));
+        $currentUser->setCreated($datetime);
 
         $result = $this->em->getRepository('AcmeDemoBundle:User')->findOneBy(array('email'=>$email));
         if (is_null($result)) {
-            $currentUser->setFullName($full_name);
-            $currentUser->setPassword($password);
-            $currentUser->setEmail($email);
-            $currentUser->setIsActive(true);
-            $currentUser->setPhone('2222');
-            $currentUser->setCreated($datetime);
+            $this->em->persist($currentUser);
+            $this->em->flush();
         }
-
-        $currentUser->serialize();
-//        var_dump($currentUser); die;
-
-//        $this->em->persist($currentUser);
-//        $this->em->flush();
 
         return $currentUser;
 

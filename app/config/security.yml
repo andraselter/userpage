@@ -32,15 +32,6 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        # the login page has to be accessible for everybody
-#         admin_login:
-#            pattern:  ^/admin/login$
-#             security: false
-#         admin_social:
-#             pattern:  ^/admin/social
-#             security: false
-#             anonymous: true
-
         secured_admin:
             pattern:    ^/
             anonymous: true
