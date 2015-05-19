@@ -1,0 +1,87 @@
+# you can read more about security in the related section of the documentation
+# http://symfony.com/doc/current/book/security.html
+security:
+    # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
+    encoders:
+        Acme\DemoBundle\Entity\User:
+            algorithm: sha1
+            encode_as_base64:    false
+            iterations: 1
+
+    # http://symfony.com/doc/current/book/security.html#hierarchical-roles
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        our_db_provider:
+            entity:
+                class: AcmeDemoBundle:User
+                property: email
+                # if you're using multiple entity managers
+                # manager_name: customer
+        hwi:
+            id: hwi_oauth.user.provider
+
+    # the main part of the security, where you can set up firewalls
+    # for specific sections of your app
+    firewalls:
+ #        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        # the login page has to be accessible for everybody
+#         admin_login:
+#            pattern:  ^/admin/login$
+#             security: false
+#         admin_social:
+#             pattern:  ^/admin/social
+#             security: false
+#             anonymous: true
+
+        secured_admin:
+            pattern:    ^/
+            anonymous: true
+            logout: true
+
+            form_login:
+                provider: our_db_provider
+                login_path: login_route
+                check_path: login_check
+                default_target_path: admin
+            oauth:
+                resource_owners:
+                    facebook:      /social/login_facebook
+                login_path:        login_route
+                check_path:        login_check
+                default_target_path: /profile
+                #failure_path:      login_route
+                always_use_default_target_path: true
+                oauth_user_provider:
+                    service: acme.demo.fbprovider
+
+
+
+        # secures part of the application
+#        demo_secured_area:
+#            pattern:    ^/demo/secured/
+#            # it's important to notice that in this case _demo_security_check and _demo_login
+#            # are route names and that they are specified in the AcmeDemoBundle
+#            form_login:
+#                check_path: _demo_security_check
+#                login_path: _demo_login
+#            logout:
+#                path:   _demo_logout
+#                target: _demo
+#            #anonymous: ~
+#            #http_basic:
+#            #    realm: "Secured Demo Area"
+
+    # with these settings you can restrict or allow access for different parts
+    # of your application based on roles, ip, host or methods
+    # http://symfony.com/doc/current/cookbook/security/access_control.html
+    access_control:
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/profile, roles: ROLE_ADMIN }

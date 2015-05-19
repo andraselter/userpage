@@ -1,0 +1,20 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+# app/config/routing.yml
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /social/connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /social/login
+
+
+facebook_login:
+    pattern: /social/login_facebook
+
+userpage:
+    resource: "@AcmeDemoBundle/Controller"
+    type:     annotation

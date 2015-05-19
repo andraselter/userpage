@@ -1,0 +1,7 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+userpage:
+    resource: "@AcmeDemoBundle/Controller"
+    type:     annotation
