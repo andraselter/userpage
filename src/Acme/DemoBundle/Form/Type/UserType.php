@@ -13,14 +13,6 @@ class UserType extends AbstractType
         $builder->add('full_name', 'text');
         $builder->add('email', 'email');
         $builder->add('phone', 'text');
-
-       /* $builder->add('user', 'collection', array(
-            'type' => new UserType(),
-            'allow_add'    => true,
-            'allow_delete'    => true,
-            'by_reference' => false,
-        ));*/
-
         $builder->add('password', 'repeated', array(
             'first_name'  => 'password',
             'second_name' => 'confirm',

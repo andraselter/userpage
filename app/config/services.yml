@@ -7,13 +7,3 @@ services:
     acme.demo.fbprovider:
         class: Acme\DemoBundle\Service\FBService
         arguments: [@doctrine.orm.default_entity_manager]
-
-#services:
-#    em:
-#        alias:doctrine.orm.entity_manager
-
-
-
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

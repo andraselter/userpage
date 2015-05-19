@@ -74,12 +74,6 @@ class MainController extends Controller
 
             $em->persist($currentUser);
             $em->flush();
-
-//            return $this->redirectToRoute(...);
-//            return $this->render(
-//                'userpage/register.html.twig',
-//                array('form' => $form->createView())
-//            );
         }
 
         return $this->render(
@@ -96,7 +90,6 @@ class MainController extends Controller
     {
         $current_dt = new \DateTime('now');
 
-
         $user = $this->getDoctrine()
             ->getRepository('AcmeDemoBundle:User')
             ->findOneBy(array('token'=>$token));
@@ -109,9 +102,7 @@ class MainController extends Controller
 
         $id = $user->getId();
 
-//        return $this->redirectToRoute('custom_method', array("id"=>$id));
         return $this->redirectToRoute('login_route');
-
     }
 
 
